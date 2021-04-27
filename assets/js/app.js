@@ -1,5 +1,5 @@
+console.log("app.js loaded");
 
-// @TODO: YOUR CODE HERE!
 // Step 1: Set up our chart
 //= ================================
 var svgWidth = 960;
@@ -12,9 +12,11 @@ var margin = {
   left: 50
 };
 
+// Calculate chart width and height
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
-// Calculate chart width and height
+
+
 
 // Step 2: Create an SVG wrapper,
 // append an SVG group that will hold our chart,
