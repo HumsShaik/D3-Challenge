@@ -108,3 +108,21 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
   return circlesGroup;
 }
 
+// Updating text location
+function renderXText(circlesGroup, newXScale, chosenXAxis) {
+
+  circlesGroup.transition()
+    .duration(1000)
+    .attr("dx", d => newXScale(d[chosenXAxis]));
+
+  return circlesGroup;
+}
+function renderYText(circlesGroup, newYScale, chosenYAxis) {
+
+  circlesGroup.transition()
+    .duration(1000)
+    .attr("dy", d => newYScale(d[chosenYAxis])+5)
+
+  return circlesGroup;
+}
+
