@@ -247,4 +247,24 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
   var yAxis = chartGroup.append("g")
     .call(leftAxis);
 
+  // append initial circles
+  var circlesGroup = chartGroup.selectAll("circle")
+    .data(data)
+    .enter()
+    .append("g");
+
+  var circles = circlesGroup.append("circle")
+    .attr("cx", d => xLinearScale(d[chosenXAxis]))
+    .attr("cy", d => yLinearScale(d[chosenYAxis]))
+    .attr("r", 15)
+    .classed('stateCircle', true);
+
+  // append text inside circles
+  var circlesText = circlesGroup.append("text")
+    .text(d => d.abbr)
+    .attr("dx", d => xLinearScale(d[chosenXAxis]))
+    //to center the text in the circles
+    .attr("dy", d => yLinearScale(d[chosenYAxis])+5) 
+    .classed('stateText', true);
+
   
