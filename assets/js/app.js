@@ -403,4 +403,74 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
       }
     });
 
-    
+    // ==============================
+    //  y axis labels event listener
+    // ==============================
+
+  ylabelsGroup.selectAll("text")
+  .on("click", function() {
+    // get value of selection
+    var value = d3.select(this).attr("value");
+    if (value !== chosenYAxis) {
+
+      // replaces chosenYAxis with value
+      chosenYAxis = value;
+
+      // console.log(chosenYAxis)
+
+      // functions here found above csv import
+      // updates y scale for new data
+      yLinearScale = yScale(data, chosenYAxis);
+
+      // updates x axis with transition
+      yAxis = renderYAxes(yLinearScale, yAxis);
+
+      // updates circles with new y values
+      circles = renderYCircles(circles, yLinearScale, chosenYAxis);
+
+      // update text within circles
+      circlesText = renderYText(circlesText, yLinearScale, chosenYAxis) 
+
+      // updates tooltips with new info
+      circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+
+      // changes classes to change bold text
+      if (chosenYAxis === "obesity") {
+        ObeseLabel
+          .classed("active", true)
+          .classed("inactive", false);
+        SmokesLabel
+          .classed("active", false)
+          .classed("inactive", true);
+        HealthLabel
+          .classed("active", false)
+          .classed("inactive", true);
+      }
+      else if(chosenYAxis === 'smokes'){
+        SmokesLabel
+          .classed("active", true)
+          .classed("inactive", false);
+        HealthLabel
+          .classed("active", false)
+          .classed("inactive", true);
+        ObeseLabel
+          .classed("active", false)
+          .classed("inactive", true);
+      }
+      else {
+        HealthLabel
+          .classed("active", true)
+          .classed("inactive", false);
+        SmokesLabel
+          .classed("active", false)
+          .classed("inactive", true);
+        ObeseLabel
+          .classed("active", false)
+          .classed("inactive", true);
+      }
+    }
+  });
+}).catch(function(error) {
+  console.log(error);
+});
+
