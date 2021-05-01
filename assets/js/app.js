@@ -1,29 +1,30 @@
-console.log("app.js loaded");
-// *****************************
-//   Step 1: Set up our chart
-// *****************************
+ console.log("app.js loaded");
 
-var svgWidth = 960;
-var svgHeight = 500;
+// =====================
+//   Set up our chart
+// =====================
 
-var margin = {
+const svgWidth = 960;
+const svgHeight = 500;
+
+const margin = {
   top: 20,
   right: 40,
-  bottom: 60,
-  left: 50
+  bottom: 80,
+  left: 100
 };
 
 // Calculate chart width and height
 
-var width = svgWidth - margin.left - margin.right;
-var height = svgHeight - margin.top - margin.bottom;
+const width = svgWidth - margin.left - margin.right;
+const height = svgHeight - margin.top - margin.bottom;
 
 
-// ***************************************************
-//   Step 2: Create an SVG wrapper,
+// ====================================================
+//   Create an SVG wrapper,
 //   append an SVG group that will hold our chart,
 //   and shift the latter by left and top margins.
-// ***************************************************
+// ====================================================
 
 const svg = d3
   .select("#scatter")
@@ -40,7 +41,12 @@ const chartGroup = svg.append("g")
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
+// ====================================================================
+//  function for updating x-scale and y-scale upon click on axis label
+// ====================================================================
+
 // function used for updating x-scale var upon click on axis label
+
 function xScale(data, chosenXAxis) {
   // create scales
   const xLinearScale = d3.scaleLinear()
@@ -54,6 +60,7 @@ function xScale(data, chosenXAxis) {
 }
 
 // function used for updating y-scale var upon click on axis label
+
 function yScale(data, chosenYAxis) {
   // create scales
   var yLinearScale = d3.scaleLinear()
@@ -63,6 +70,10 @@ function yScale(data, chosenYAxis) {
   return yLinearScale;
 
 }
+
+// ====================================================================
+//  function for updating xAxis and yAxis upon click on axis label
+// ====================================================================
 
 // function used for updating xAxis var upon click on axis label
 function renderXAxes(newXScale, xAxis) {
@@ -86,6 +97,11 @@ function renderYAxes(newYScale, yAxis) {
   return yAxis;
 }
 
+// ====================================================================
+//   function for updating circles group to new circles x and y
+// ====================================================================
+
+
 // functions used for updating circles group with a transition to new circles for x
 function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
 
@@ -108,7 +124,10 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
   return circlesGroup;
 }
 
-// Updating text location
+// ===========================
+//   Updating text location
+// ===========================
+
 function renderXText(circlesGroup, newXScale, chosenXAxis) {
 
   circlesGroup.transition()
@@ -117,6 +136,7 @@ function renderXText(circlesGroup, newXScale, chosenXAxis) {
 
   return circlesGroup;
 }
+
 function renderYText(circlesGroup, newYScale, chosenYAxis) {
 
   circlesGroup.transition()
@@ -126,7 +146,10 @@ function renderYText(circlesGroup, newYScale, chosenYAxis) {
   return circlesGroup;
 }
 
-// function used for updating circles group with new tooltip
+// ============================================================
+//  function used for updating circles group with new tooltip
+// ============================================================
+
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   var xlabel;
