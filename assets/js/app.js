@@ -267,4 +267,35 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .attr("dy", d => yLinearScale(d[chosenYAxis])+5) 
     .classed('stateText', true);
 
+  // =======================================
+  // Create group for three x-axis labels
+  // =======================================
+
+  var xlabelsGroup = chartGroup.append("g")
+    .attr("transform", `translate(${width / 2}, ${height + 20})`);
+
+  var PovertyLabel = xlabelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 20)
+    // value to grab for event listener
+    .attr("value", "poverty") 
+    .classed("active", true)
+    .text("In Poverty (%)");
+
+  var AgeLabel = xlabelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 40)
+    // value to grab for event listener
+    .attr("value", "age") 
+    .classed("inactive", true)
+    .text("Age (Median)");
+
+  var IncomeLabel = xlabelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 60)
+    // value to grab for event listener
+    .attr("value", "income") 
+    .classed("inactive", true)
+    .text("Household Income (Median)");
   
+ 
