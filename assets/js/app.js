@@ -298,4 +298,41 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     .classed("inactive", true)
     .text("Household Income (Median)");
   
- 
+  // =====================================
+  //  Create group for three y-axis labels
+  // =====================================
+
+  var ylabelsGroup = chartGroup.append("g")
+    .attr("transform", "rotate(-90)")
+  
+  var ObeseLabel = ylabelsGroup.append("text")
+    .attr("y", -80)
+    .attr("x", -(height/2))
+    .attr("dy", "1em")
+    // value to grab for event listener
+    .attr("value", "obesity") 
+    .classed("inactive", true)
+    .text("Obese (%)");
+
+  var SmokesLabel = ylabelsGroup.append("text")
+    .attr("y", -60)
+    .attr("x", -(height/2))
+    .attr("dy", "1em")
+    // value to grab for event listener
+    .attr("value", "smokes") 
+    .classed("inactive", true)
+    .text("Smokes (%)");
+
+  var HealthLabel = ylabelsGroup.append("text")
+    .attr("y", -40)
+    .attr("x", -(height/2))
+    .attr("dy", "1em")
+    // value to grab for event listener
+    .attr("value", "healthcare") 
+    .classed("active", true)
+    .text("Lacks Healthcare (%)");
+
+  // updateToolTip function above csv import
+  circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+
+  
